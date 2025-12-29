@@ -1,0 +1,13 @@
+Project Title: Programming Assignment 2_ Lexical Scoping 
+
+Please submit the URL pointing to your GitHub repository containing the completed R code for this assignment. (NOTE: Please submit the URL for the entire repository, not for any individual files.) On a separate line, submit the SHA-1 hash identifier corresponding to the commit that contains the full submission (the identifier should be a string of 40 characters containing numbers 0-9 and letters a-f).
+
+URL: https://github.com/forged-by-sim/ProgrammingAssignment2
+
+Title: ProgrammingAssignment2 
+
+Caption: Complete Programming Assignment 2 
+
+Submit the SHA-1 hash identifier corresponding to the commit that contains the full submission (the identifier should be a string of 40 characters containing numbers 0-9 and letters a-f).
+
+ac6beff101f7552046e1fb2b097647d15e2640ca 

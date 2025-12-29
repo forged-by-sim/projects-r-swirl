@@ -1,0 +1,52 @@
+rankhospital <- function(state, outcome, num = "best") {
+  
+  ## Read data
+  outcome_data <- read.csv(
+    "hospital_quality_data/outcome-of-care-measures.csv",
+    colClasses = "character"
+  )
+  
+  ## Check state
+  if (!(state %in% outcome_data$State)) {
+    stop("invalid state")
+  }
+  
+  ## Outcome → column mapping
+  outcome_col <- switch(
+    outcome,
+    "heart attack"  = 11,
+    "heart failure" = 17,
+    "pneumonia"     = 23,
+    stop("invalid outcome")
+  )
+  
+  ## Subset state
+  state_data <- outcome_data[outcome_data$State == state, ]
+  
+  ## Convert outcome column to numeric
+  state_data[, outcome_col] <- as.numeric(state_data[, outcome_col])
+  
+  ## Remove missing outcomes
+  state_data <- state_data[!is.na(state_data[, outcome_col]), ]
+  
+  ## Order by outcome, then hospital name
+  ordered <- state_data[
+    order(state_data[, outcome_col], state_data$Hospital.Name),
+  ]
+  
+  ## Determine rank
+  if (num == "best") {
+    rank <- 1
+  } else if (num == "worst") {
+    rank <- nrow(ordered)
+  } else {
+    rank <- num
+  }
+  
+  ## Return hospital or NA
+  if (rank > nrow(ordered)) {
+    return(NA)
+  }
+  
+  ordered$Hospital.Name[rank]
+}

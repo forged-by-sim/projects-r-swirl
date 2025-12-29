@@ -1,0 +1,130 @@
+How This All Fits Together (Concrete Workflow)
+Step 1 — Put things in the right place
+
+Your folder should look like this:
+
+📁 air_pollution/
+├── specdata/
+│   ├── 001.csv
+│   ├── 002.csv
+│   └── ...
+├── pollutantmean.R
+├── complete.R
+└── corr.R
+
+
+📌 The folder name must be exactly specdata
+
+Step 2 — Write the function (once)
+
+Example: pollutantmean.R
+
+Save it.
+
+Step 3 — Load the function into R
+
+In the Console:
+
+setwd("path/to/air_pollution")
+source("pollutantmean.R")
+
+Now R knows the function.
+
+Step 4 — Run the EXACT quiz calls
+
+When the quiz asks:
+
+pollutantmean("specdata", "sulfate", 1:10)
+
+You literally run:
+
+pollutantmean("specdata", "sulfate", 1:10)
+
+R prints a number like:
+
+[1] 4.064
+
+🎯 That’s the answer you choose in the quiz.
+
+
+
+
+About the complete() quiz question (important)
+
+When the quiz shows:
+
+cc <- complete("specdata", c(6, 10, 20, 34, 100, 200, 310))
+print(cc$nobs)
+
+You do this in R:
+
+source("complete.R")
+cc <- complete("specdata", c(6, 10, 20, 34, 100, 200, 310))
+cc$nobs
+
+R will output something like:
+
+[1] 227 184 189 196 232 224 189
+
+🎯 That exact sequence is the quiz answer.
+
+
+
+
+Now, here’s the missing glue (the exact workflow)
+Step 1: Open RStudio
+
+You do everything from RStudio, not Coursera.
+
+Step 2: Set your working directory (once per session)
+
+In the Console:
+
+setwd("C:/Simulation_Projects/GitHub/R/air_pollution")
+
+Then verify:
+
+getwd()
+
+It should print:
+
+C:/Simulation_Projects/GitHub/R/air_pollution
+
+This is why "specdata" works — R is now standing in that folder.
+
+Step 3: Load your function
+
+For example, for quiz questions about pollutantmean():
+
+source("pollutantmean.R")
+
+This does not run the function — it just teaches R that the function exists.
+
+Step 4: Answer quiz questions by running them verbatim
+
+When the quiz asks:
+
+pollutantmean("specdata", "sulfate", 1:10)
+
+You run that exact line in the console:
+
+pollutantmean("specdata", "sulfate", 1:10)
+
+R returns something like:
+
+[1] 4.064
+
+➡️ You select 4.064 in the quiz.
+
+That’s it. No interpretation. No guessing.
+
+
+
+✅ Complete workflow comprehension
+
+Your console shows you now understand all of this as one system:
+
+Data → Function → Source → Call → Output → Quiz
+
+Not separate steps.
+One pipeline.
