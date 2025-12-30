@@ -1,0 +1,1 @@
+Note on swirl lessons: Swirl is auto-graded and does not allow you to move forward until you enter the correct answer. Every completed swirl lesson in this repository therefore reflects a verified, correct solution, even if my screenshots sometimes show earlier attempts or in-progress mistakes.
