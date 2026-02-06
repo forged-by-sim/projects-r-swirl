@@ -1,0 +1,50 @@
+The if-else combination is probably the most commonly used control structure in R (or perhaps any language). This structure allows you to test a condition and act on it depending on whether it's true or false.
+
+For starters, you can just use the if statement.
+
+if(<condition>) {
+      ## do something
+}
+      ## Continue with rest of code
+
+
+The above code does nothing if the condition is false. If you have an action you want to execute when the condition is false, then you need an else clause.
+
+if(<condition>) {
+      ## do something
+}
+else {
+      ## do something else
+}
+
+
+You can have a series of tests by following the initial if with any number of else ifs.
+
+if(<condition1>) {
+      ## do something
+} else if(<condition2>) {
+      ## do something different
+} else {
+      ## do something different
+}
+
+
+Here is an example of a valid if/else structure.
+
+## Generate a uniform random number
+x <- runif(1, 0, 10)
+if(x > 3) {
+        y <- 10
+} else {
+        y <- 0
+}
+
+
+The value of y is set depending on whether x > 3 or not.
+
+Of course, the else clause is not necessary. You could have a series of if clauses that always get executed if their respective conditions are true.
+
+if(<condition1>) {
+}
+if(<condition2>) {
+}

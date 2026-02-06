@@ -1,0 +1,9 @@
+If you’d like to learn more about profiling R code, or improving performance of R code once you’ve profiled, you might find these resources helpful:
+
+RStudio’s profvis documentation
+
+Section on performant code in Hadley Wickham’s Advanced Rbook
+http://adv-r.had.co.nz/Performance.html
+
+“FasteR! HigheR! StrongeR! - A Guide to Speeding Up R Code for Busy People”, an article by Noam Ross
+https://www.noamross.net/archives/2013-04-25-faster-talk/

@@ -1,0 +1,21 @@
+Summary
+
+R has three object oriented systems: S3, S4, and Reference Classes.
+
+Reference Classes are the most similar to classes and objects in other programming languages.
+
+Classes are blueprints for an object.
+
+Objects are individual instances of a class.
+
+Methods are functions that are associated with a particular class.
+
+Constructors are methods that create objects.
+
+Everything in R is an object.
+
+S3 is a liberal object oriented system that allows you to assign a class to any object.
+
+S4 is a more strict object oriented system that build upon ideas in S3.
+
+Reference Classes are a modern object oriented system that is similar to Java, C++, Python, or Ruby.

@@ -1,0 +1,8 @@
+Summary
+
+Expressions are a powerful tool for manipulating and executing R code.
+
+Environments record associations between names and values.
+
+Execution environments create a scope for variable names inside of functions.
+

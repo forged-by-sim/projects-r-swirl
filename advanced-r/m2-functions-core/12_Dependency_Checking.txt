@@ -1,0 +1,30 @@
+The num_downloads() function depends on the readr and dplyr packages. Without them installed, the function won't run. Sometimes it is useful to check to see that the needed packages are installed so that a useful error message (or other behavior) can be provided for the user.
+
+We can write a separate function to check that the packages are installed.
+
+
+check_pkg_deps <- function() {
+        if(!require(readr)) {
+                message("installing the 'readr' package")
+                install.packages("readr")
+        }
+        if(!require(dplyr))
+                stop("the 'dplyr' package needs to be installed first")
+}
+
+
+There are a few things to note about this function. First, it uses the require() function to attempt to load the readr anddplyr packages. The require() function is similar to library(), however library() stops with an error if the package cannot be loaded whereas require() returns TRUE or FALSE depending on whether the package can be loaded or not. For both functions, if the package is available, it is loaded and attached to the search() path.
+
+Typically, library() is good for interactive work because you usually can't go on without a specific package (that's why you're loading it in the first place!). On the other hand, require() is good for programming because you may want to engage in different behaviors depending on which packages are not available.
+
+For example, in the above function, if the readr package is not available, we go ahead and install the package for the user (along with providing a message). However, if we cannot load the dplyr package we throw an error. This distinction in behaviors for readr and dplyr is a bit arbitrary in this case, but it illustrates the flexibility that is afforded by usingrequire() versus library().
+
+Now, our updated function can check for package dependencies.
+
+
+num_download <- function(pkgname, date = "2016-07-20") {
+        check_pkg_deps()
+        dest <- check_for_logfile(date)
+        cran <- read_csv(dest, col_types = "ccicccccci", progress = FALSE)
+        cran %>% filter(package == pkgname) %>% nrow
+}

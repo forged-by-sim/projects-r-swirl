@@ -1,0 +1,64 @@
+Once you’ve identified slower code, you’ll likely want to figure out which parts of the code are causing bottlenecks. The profvisfunction from the profvis package is very useful for this type of profiling. This function uses the RProf function from base R to profile code, and then displays it in an interactive visualization in RStudio. This profiling is done by sampling, with the RProf function writing out the call stack every 10 milliseconds while running the code.
+
+To profile code with profvis, just input the code (in braces if it is mutli-line) into profvis within RStudio. For example, we found that the find_records_1 function was slow when used with a large data set. To profile the code in that function, run:
+
+
+library(profvis)
+datafr <- chicagoNMMAPS
+threshold <- 27
+
+profvis({
+  highest_temp <- c()
+  record_temp <- c()
+  for(i in 1:nrow(datafr)){
+    highest_temp <- max(highest_temp, datafr$temp[i])
+    record_temp[i] <- datafr$temp[i] >= threshold & 
+      datafr$temp[i] >= highest_temp
+  }
+  datafr <- cbind(datafr, record_temp)
+})
+
+
+
+
+The profvis output gives you two options for visualization: “Flame Graph” or “Data” (a button to toggle between the two is given in the top left of the profvis visualization created when you profile code). The “Data” output defaults to show you the time usage of each first-level function call. Each of these calls can be expanded to show deeper and deeper functions calls within the call stack. This expandable interface allows you to dig down within a call stack to determine what calls are causing big bottlenecks. For functions that are part of a package you have loaded with devtools::load_all, this output includes a column with the file name where a given function is defined. This functionality makes this “Data” output pane particularly useful in profiling functions in a package you are creating.
+
+The “Flame Graph” view in profvis output gives you two panels. The top panel shows the code called, with bars on the right to show memory use and time spent on the line. The bottom panel also visualizes the time used by each line of code, but in this case it shows time use horizontally and shows the full call stack at each time sample, with initial calls shown at the bottom of the graph, and calls deeper in the call stack higher in the graph. Clicking on a block in the bottom panel will show more information about a call, including which file it was called from, how much time it took, how much memory it took, and its depth in the call stack.
+
+Figure 2.3 shows example output from profiling the code in thefind_records_1 function defined earlier in this section.
+
+
+
+Figure 2.3: Example of profvis output for a function to find record temperatures.
+
+Based on this visualization, most of the time is spent on line 6, filling in the record_temp vector. Now that we know this, we could try to improve the function, for example by doing a better job of initializing vectors before running the loop.
+
+The profvis visualization can be used to profile code in functions you’re writing as part of a package. If some of the functions in the code you are profiling are in a package currently loaded with loaded with devtools::load_all, the top panel in the Flame Graph output will include the code defining those functions, which allows you to explore speed and memory use within the code for each function. You can also profile code within functions from other packages– for more details on the proper set-up, see the “FAQ” section of 
+RStudio’sprofvis documentation.
+
+The profvis function will not be able to profile code that runs to quickly. Trying to profile functions that are too fast will give you the following error message:
+
+
+Error in parse_rprof(prof_output, expr_source) : 
+  No parsing data available. Maybe your function was too fast?
+
+
+You can use the argument interval in profvis to customize the sampling interval. The default is to sample every 10 milliseconds (interval = 0.01), but you can decrease this sampling interval. In some cases, you may be able to use this option to profile faster-running code. However, you should avoid using an interval smaller than about 5 milliseconds, as below that you will get inaccurate estimates with profvis. If you are running very fast code, you’re better off profiling with microbenchmark, which can give accurate estimates at finer time intervals.
+
+Here are some tips for optimizing your use of profvis:
+
+You may find it convenient to use the “Show in new window” button on the RStudio pane with profiling results to expand this window while you are interpreting results.
+
+An “Options” button near the top right gives different options for how to display the profiling results, including whether to include memory profiling results and whether to include lines of code with zero time.
+
+You can click-and-drag results in the bottom visualization panel, as well as pan in and out.
+
+You may need to update your version of RStudio to be able to use the full functionality of profvis. You can download a Preview version of RStudio 
+here.
+
+If you’d like to share code profiling results from profvis publicly, you can do that by using the “Publish” button on the top right of the rendered profile visualization to publish the visualization to RPubs. The “FAQ” section of RStudio’s profvis documentation includes more tips for sharing a code profile visualization online.
+
+If you get a lot of blocks labeled “<Anonymous>”, try updating your version of R. In newer versions of R, functions called usingpackage::function() syntax or list$function() syntax are labeled in profiling blocks in a more meaningful way. This is likely to be a particular concern if you are profiling code in a package you are developing, as you will often be usingpackage::function() syntax extensively to pass CRAN checks.
+
+
+

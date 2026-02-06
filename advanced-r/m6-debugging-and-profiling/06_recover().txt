@@ -1,0 +1,23 @@
+The recover() function is not often used but can be an essential tool when debugging complex code. Typically, you do not callrecover() directly, but rather set it as the function to invoke anytime an error occurs in code. This can be done via the options()function.
+
+
+options(error = recover)
+
+
+Usually, when an error occurs in code, the code stops execution and you are brought back to the usual R console prompt. However, whenrecover() is in use and an error occurs, you are given the function call stack and a menu.
+
+
+error_if_n_is_greater_than_zero(5)
+Error in check_n_value(n) : n should be <= 0
+
+Enter a frame number, or 0 to exit   
+
+1: error_if_n_is_greater_than_zero(5)
+2: #2: check_n_value(n)
+
+Selection:
+
+
+Selecting a number from this menu will bring you into that function on the call stack and you will be placed in a browser environment. You can exit the browser and then return to this menu to jump to another function in the call stack.
+
+The recover() function is very useful if an error is deep inside a nested series of function calls and it is difficult to pinpoint exactly where an error is occurring (so that you might use browser() ortrace()). In such cases, the debug() function is often of little practical use because you may need to step through many many expressions before the error actually occurs. Another scenario is when there is a stochastic element to your code so that errors occur in an unpredictable way. Using recover() will allow you to browse the function environment only when the error eventually does occur.

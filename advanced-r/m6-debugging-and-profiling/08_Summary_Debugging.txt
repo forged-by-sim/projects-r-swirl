@@ -1,0 +1,5 @@
+Summary
+
+Debugging in R is facilitated with the functions browser,debug, trace, recover, and traceback.
+
+These debugging tools should not be used as a crutch when developing functions.

@@ -1,0 +1,17 @@
+When Should I Write a Function? 
+
+Deciding when to write a function depends on the context in which you are programming in R. For a one-off type of activity, it's probably not worth considering the design of a function or set of function. However, in our experience, there are relatively few one-off scenarios. In particular, such a scenario implies that whatever you did worked on the very first try.
+
+In reality, we often have to repeat certain tasks or we have to share code with others. Sometimes those "other people" are simply ourselves 3 months later. As the great Karl Broman once famously said
+
+Your closest collaborator is you six months ago, but you don't reply to emails.
+
+This comment relates to the general question of whether some code will ever have any users, including yourself later on. If the code will likely have more than one user, they will benefit from the abstraction and simplification afforded by encapsulating the code in functions and providing a clean interface.
+
+In Roger's book, Executive Data Science, he writes about when to write a function:
+
+If you're going to do something once (that does happen on occasion), just write some code and document it very well. The important thing is that you want to make sure that you understand what the code does, and so that requires both writing the code well and writing documentation. You want to be able to reproduce it later on if you ever come back to it, or if someone else comes back to it.
+
+If you're going to do something twice, write a function. This allows you to abstract a small piece of code, and it forces you to define an interface, so you have well defined inputs and outputs.
+
+If you're going to do something three times or more, you should think about writing a small package. It doesn't have to be commercial level software, but a small package which encapsulates the set of operations that you're going to be doing in a given analysis. It's also important to write some real documentation so that people can understand what's supposed to be going on, and can apply the software to a different situation if they have to.

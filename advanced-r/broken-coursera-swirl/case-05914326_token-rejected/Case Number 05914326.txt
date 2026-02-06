@@ -1,0 +1,56 @@
+Case Number: 05914326  
+Date Opened: January 8, 2026  
+Status: Closed without resolution by Support; resolved manually through workaround
+
+---
+
+### 📌 Issue Summary
+During the Advanced R Programming course, the token for the **Swirl Lesson – Functions** manual submission was rejected. Despite completing the lesson in RStudio (v4.5.2) and receiving a 100% automatic score, the manual token submission returned an error.
+
+---
+
+### 🧪 Environment Details
+- Platform: Coursera
+- Course: Advanced R Programming (Johns Hopkins University)
+- Local R version: 4.5.2
+- Swirl module: Functional Programming – Lesson: Functions
+- Submission method: Manual token submission via Coursera quiz
+
+---
+
+### 🛠️ Actions Taken
+1. Verified lesson completion and successful token generation in local RStudio.
+2. Attempted browser-level fixes:
+   - Cleared cache and cookies
+   - Disabled browser extensions
+   - Tried multiple browsers
+3. Submitted ticket to Coursera Support
+4. Received initial troubleshooting steps from AI assistant (Cora)
+5. Escalated to human support (Ivanna) after failure to resolve via browser troubleshooting
+
+---
+
+### 📥 Coursera Response
+Support determined the issue was *content-specific* and redirected the concern to the public **Coursera Community forums**, stating that their platform team could not assist with course-specific grading errors.
+
+📎 *See attached screenshots in this folder for full message context.*
+
+---
+
+### 🧭 Workaround Implemented
+To continue progress:
+- Repeated the Swirl lesson using the **Coursera-hosted Sandbox RStudio IDE**
+- Successfully submitted token through alternate environment
+- Received full credit via workaround
+
+---
+
+### ✅ Outcome
+Although the issue was not resolved through Coursera Support, a manual workaround using the Sandbox IDE allowed the assignment to be completed and full progress in the course to resume.
+
+---
+
+### 💬 Notes
+This issue highlights a potential mismatch between Swirl lesson environments (local vs. Coursera IDE).  
+The lack of technical resolution from support prompted public documentation for other learners facing the same bug.
+

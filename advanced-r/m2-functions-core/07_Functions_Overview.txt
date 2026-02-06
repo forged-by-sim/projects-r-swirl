@@ -1,0 +1,7 @@
+Functions Overview
+
+The development of a function in R represents the next level of R programming, beyond executing commands at the command line and writing scripts containing multiple R expressions. When writing R functions, one has to consider the following things:
+
+Functions are used to encapsulate a sequence of expressions that are executed together to achieve a specific goal. A single function typically does "one thing well"---often taking some input and the generating output that can potentially be handed off to another function for further processing. Drawing the lines where functions begin and end is a key skill for writing functions. When writing a function, it's important to ask yourself what do I want to encapsulate?
+
+There is going to be a user who will desire the ability to modify certain aspects of your code to match their specific needs or application. Aspects of your code that can be modified often become function arguments that can be specified by the user. This user can range from yourself (at a later date) to people you have never met using your code for purposes you never dreamed of. When writing any function it's important to ask what will the user want to modify in this function? Ultimately, the answer to this question will lead to the function's interface.

@@ -1,0 +1,31 @@
+You can search for specific elements of a vector using thecontains() and detect() functions. contains() will returnTRUE if a specified element is present in a vector, otherwise it returnsFALSE:
+
+
+contains(letters, "a")
+[1] TRUE
+contains(letters, "A")
+[1] FALSE
+
+
+The detect() function takes a vector and a predicate function as arguments and it returns the first element of the vector for which the predicate function returns TRUE:
+
+
+detect(20:40, function(x){
+  x > 22 && x %% 2 == 0
+})
+[1] 24
+
+
+The detect_index() function takes the same arguments, however it returns the index of the provided vector which contains the first element that satisfies the predicate function:
+
+
+detect_index(20:40, function(x){
+  x > 22 && x %% 2 == 0
+})
+[1] 5
+
+
+
+
+
+

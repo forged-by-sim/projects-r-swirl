@@ -1,0 +1,170 @@
+The microbenchmark package is useful for running small sections of code to assess performance, as well as for comparing the speed of several functions that do the same thing. The microbenchmarkfunction from this package will run code multiple times (100 times is the default) and provide summary statistics describing how long the code took to run across those iterations. The process of timing a function takes a certain amount of time itself. The microbenchmarkfunction adjusts for this overhead time by running a certain number of “warm-up” iterations before running the iterations used to time the code.
+
+You can use the times argument in microbenchmark to customize how many iterations are used. For example, if you are working with a function that is a bit slow, you might want to run the code fewer times when benchmarking (although with slower or more complex code, it likely will make more sense to use a different tool for profiling, likeprofvis).
+
+You can include multiple lines of code within a single call tomicrobenchmark. However, to get separate benchmarks of line of code, you must separate each line by a comma:
+
+
+library(microbenchmark)
+microbenchmark(a <- rnorm(1000), 
+               b <- mean(rnorm(1000)))
+Unit: microseconds
+                   expr    min      lq     mean median      uq     max
+       a <- rnorm(1000) 74.489 75.2365 77.30950 75.656 76.9050  92.557
+ b <- mean(rnorm(1000)) 80.306 81.1345 86.85133 81.873 88.7785 129.834
+ neval
+   100
+   100
+
+
+The microbenchmark function is particularly useful for comparing functions that take the same inputs and return the same outputs. As an example, say we need a function that can identify days that meet two conditions: (1) the temperature equals or exceeds a threshold temperature (27 degrees Celsius in the examples) and (2) the temperature equals or exceeds the hottest temperature in the data before that day. We are aiming for a function that can input a data frame that includes a column named temp with daily mean temperature in Celsius, like this data frame:
+
+
+date          temp
+2015-07-01    26.5
+2015-07-02    27.2
+2015-07-03    28.0
+2015-07-04    26.9
+2015-07-05    27.5
+2015-07-06    25.9
+2015-07-07    28.0
+2015-07-08    28.2
+
+
+and outputs a data frame that has an additional binary record_tempcolumn, specifying if that day meet the two conditions, like this:
+
+
+date          temp    record_temp
+2015-07-01    26.5    FALSE   
+2015-07-02    27.2    TRUE    
+2015-07-03    28.0    TRUE    
+2015-07-04    26.9    FALSE   
+2015-07-05    27.5    FALSE   
+2015-07-06    25.9    FALSE   
+2015-07-07    28.0    TRUE    
+2015-07-08    28.2    TRUE    
+
+
+Below are two example functions that can perform these actions. Since the record_temp column depends on temperatures up to that day, one option is to use a loop to create this value. The first function takes this approach. The second function instead uses tidyverse functions to perform the same tasks.
+
+
+# Function that uses a loop 
+find_records_1 <- function(datafr, threshold){
+  highest_temp <- c()
+  record_temp <- c()
+  for(i in 1:nrow(datafr)){
+    highest_temp <- max(highest_temp, datafr$temp[i])
+    record_temp[i] <- datafr$temp[i] >= threshold & 
+      datafr$temp[i] >= highest_temp
+  }
+  datafr <- cbind(datafr, record_temp)
+  return(datafr)
+}
+
+# Function that uses tidyverse functions
+find_records_2 <- function(datafr, threshold) {
+  datafr <- datafr %>%
+    mutate_(over_threshold = ~ temp >= threshold,
+            cummax_temp    = ~ temp == cummax(temp),
+            record_temp    = ~ over_threshold & cummax_temp) %>%
+    select_(.dots = c("-over_threshold", "-cummax_temp"))
+  
+  return(as.data.frame(datafr))
+}
+
+
+If you apply the two functions to the small example data set, you can see that they both create the desired output:
+
+
+example_data <- data_frame(date = c("2015-07-01", "2015-07-02",
+                                    "2015-07-03", "2015-07-04",
+                                    "2015-07-05", "2015-07-06",
+                                    "2015-07-07", "2015-07-08"),
+                           temp = c(26.5, 27.2, 28.0, 26.9, 
+                                    27.5, 25.9, 28.0, 28.2))
+
+(test_1 <- find_records_1(example_data, 27))
+        date temp record_temp
+1  2015-07-01  26.5     FALSE
+2  2015-07-02  27.2     TRUE
+3  2015-07-03  28.0     TRUE
+4  2015-07-04  26.9     FALSE
+5  2015-07-05  27.5     FALSE
+6  2015-07-06  25.9     FALSE
+7  2015-07-07  28.0     TRUE
+8  2015-07-08  28.2     TRUE
+
+test_2 <- find_records_2(example_data, 27)
+       date     temp  record_temp
+1  2015-07-01  26.5     FALSE
+2  2015-07-02  27.2     TRUE
+3  2015-07-03  28.0     TRUE
+4  2015-07-04  26.9     FALSE
+5  2015-07-05  27.5     FALSE
+6  2015-07-06  25.9     FALSE
+7  2015-07-07  28.0     TRUE
+8  2015-07-08  28.2     TRUE
+
+all.equal(test_1, test_2)
+[1] TRUE
+
+
+The performance of these two functions can be compared usingmicrobenchmark:
+
+
+record_temp_perf <- microbenchmark(find_records_1(example_data, 27), 
+                                   find_records_2(example_data, 27))
+record_temp_perf
+Unit: microseconds
+                             expr      min        lq     mean   median
+ find_records_1(example_data, 27)  674.628  704.5445  770.646  719.366
+ find_records_2(example_data, 27) 1064.935 1095.5015 1183.014 1131.834
+       uq      max neval
+  753.949 4016.827   100
+ 1190.596 4249.408   100
+
+
+
+This output gives summary statistics (min, lq, mean, median,uq, and max) describing the time it took to run the two function over the 100 iterations of each function call. By default, these times are given in a reasonable unit, based on the observed profiling times (units are given in microseconds in this case).
+
+It’s useful to check next to see if the relative performance of the two functions is similar for a bigger data set. The chicagoNMMAPS data set from the dlnm package includes temperature data over 15 years in Chicago, IL. Here are the results when we benchmark the two functions with that data (note, this code takes a minute or two to run):
+
+
+library(dlnm)
+data("chicagoNMMAPS")
+
+record_temp_perf_2 <- microbenchmark(find_records_1(chicagoNMMAPS, 27), 
+                                     find_records_2(chicagoNMMAPS, 27))
+record_temp_perf_2
+Unit: milliseconds
+                              expr        min         lq       mean
+ find_records_1(chicagoNMMAPS, 27) 182.226569 197.540354 203.531151
+ find_records_2(chicagoNMMAPS, 27)   1.974453   2.197642   2.884933
+     median         uq       max neval
+ 200.767944 205.575326 321.96972   100
+   2.343669   2.477938  14.34087   100
+
+
+
+While the function with the loop (find_records_1) performed better with the very small sample data, the function that uses tidyverse functions (find_records_2) performs much, much better with a larger data set.
+
+The microbenchmark function returns an object of the “microbenchmark” class. This class has two methods for plotting results, autoplot.microbenchmark and boxplot.microbenchmark. To use the autoplot method, you will need to have ggplot2loaded in your R session.
+
+
+library(ggplot2)
+# For small example data
+
+12
+# For larger data set
+autoplot(record_temp_perf_2)
+
+
+By default, this plot gives the “Time” axis on a log scale. You can change this with the argument log = FALSE.
+
+
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+Summary
+
+Control structures like if-else and for allow you to control the flow of an R program
+
+Control structures mentioned here are primarily useful for writing programs; for command-line interactive work, the "apply" functions are typically more useful.

@@ -1,0 +1,15 @@
+Summary
+
+Functional programming is based on lambda calculus.
+
+This approach concentrates on data, variables, functions, and function applications.
+
+It’s possible for functions to be able to return other functions.
+
+The core functional programming concepts can be summarized in the following categories: map, reduce, search, filter, and compose.
+
+Partial application of functions allows functions to be used like data structures.
+
+Side effects are difficult to debug although they motivate a huge fraction of computer programming.
+
+The most important part of understanding recursion is understanding recursion.

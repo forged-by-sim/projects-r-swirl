@@ -1,0 +1,13 @@
+Summary
+
+Developing functions is a key aspect of programming in R and typically involves a bottom-up process.
+
+1. Code is written to accomplish a specific task or a specific instance of a task.
+
+2. The code is examined to identify key aspects that may be modified by other users; these aspects are abstracted out of the code and made arguments of a function.
+
+3. Functions are written to accomplish more general versions of a task; specific instances of the task are indicated by setting values of function arguments.
+
+4. Function code can be re-factored to provide better modularity and to divide functions into specific sub-tasks.
+
+5. Functions can be assembled and organized into R packages.

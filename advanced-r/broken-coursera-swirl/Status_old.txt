@@ -1,0 +1,9 @@
+# ⏸️ Course Status: Paused at 96%
+
+This course was paused at **96% completion** due to unresolved issues with the swirl grader system and outdated package functions (e.g., `reduce_right()` no longer available in `purrr`). 
+
+All readings have been saved locally, and the peer-reviewed assignment was completed successfully with a grade of 93.33%.
+
+A support request was posted in the *R Programming Course* forum (where moderators are active), and a response is pending. If the course is updated before **January 17, 2026** (when my Coursera subscription ends), I will attempt to submit the swirl assignments and complete the course.
+
+Otherwise, this repo will remain a record of what *was* salvageable — and a reminder of the importance of actively maintained learning materials.

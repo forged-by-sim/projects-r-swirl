@@ -1,0 +1,10 @@
+The debug() and debugonce() functions can be called on other functions to turn on the “debugging state” of a function. Callingdebug() on a function makes it such that when that function is called, you immediately enter a browser and can step through the code one expression at a time.
+
+
+## Turn on debugging state for 'lm' function
+debug(lm)
+
+
+A call to debug(f) where f is a function is basically equivalent totrace(f, browser) which will call the browser() function upon entering the function.
+
+The debugging state is persistent, so once a function is flagged for debugging, it will remain flagged. Because it is easy to forget about the debugging state of a function, the debugonce() function turns on the debugging state the next time the function is called, but then turns it off after the browser is exited.

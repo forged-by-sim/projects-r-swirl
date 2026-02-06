@@ -1,0 +1,17 @@
+Note: Some of the material in this section is taken from 
+R Programming for Data Science
+
+
+Control structures in R allow you to control the flow of execution of a series of R expressions. Basically, control structures allow you to put some "logic" into your R code, rather than just always executing the same R code every time. Control structures allow you to respond to inputs or to features of the data and execute different R expressions accordingly.
+
+Commonly used control structures are
+
+if and else: testing a condition and acting on it
+
+for: execute a loop a fixed number of times
+
+break: break the execution of a loop
+
+next: skip an iteration of a loop
+
+Most control structures are not used in interactive sessions, but rather when writing functions or longer expressions. However, these constructs do not have to be used in functions and it's a good idea to become familiar with them before we delve into functions.

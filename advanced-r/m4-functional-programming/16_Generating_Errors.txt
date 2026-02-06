@@ -1,0 +1,58 @@
+There are a few essential functions for generating errors, warnings, and messages in R. The stop() function will generate an error. Let's generate an error:
+
+
+stop("Something erroneous has occured!")
+
+
+Error: Something erroneous has occured!
+
+
+If an error occurs inside of a function then the name of that function will appear in the error message:
+
+
+name_of_function <- function(){
+  stop("Something bad happened.")
+}
+
+name_of_function()
+Error in name_of_function(): Something bad happened.
+
+
+The stopifnot() function takes a series of logical expressions as arguments and if any of them are false an error is generated specifying which expression is false. Let's take a look at an example:
+
+
+error_if_n_is_greater_than_zero <- function(n){
+  stopifnot(n <= 0)
+  n
+}
+
+error_if_n_is_greater_than_zero(5)
+Error: n <= 0 is not TRUE
+
+
+The warning() function creates a warning, and the function itself is very similar to the stop() function. Remember that a warning does not stop the execution of a program (unlike an error.)
+
+
+warning("Consider yourself warned!")
+Warning: Consider yourself warned!
+
+
+Just like errors, a warning generated inside of a function will include the name of the function it was generated in:
+
+
+make_NA <- function(x){
+  warning("Generating an NA.")
+  NA
+}
+
+make_NA("Sodium")
+Warning in make_NA("Sodium"): Generating an NA.
+[1] NA
+
+
+Messages are simpler than errors or warnings, they just print strings to the R console. You can issue a message with themessage() function:
+
+
+message("In a bottle.")
+In a bottle.
+

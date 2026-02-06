@@ -1,0 +1,42 @@
+# 🛠️ Coursera Platform Issues – Advanced R Programming
+
+This folder (`broken-coursera-swirl/`) documents platform-side grading and submission issues encountered during the **Advanced R Programming** course on Coursera (Johns Hopkins University). The issues primarily involved **Swirl lessons** failing to register properly, even after full completion, resulting in blocked course progress or rejected token submissions.
+
+All issues were documented with case numbers, screenshots, support interactions, and forum posts.
+
+---
+
+## 📋 Summary Table
+
+| Case / Forum Post                          | Type        | Affected Module(s)           | Environment Used              | Issue Summary                                                                 | Outcome                          |
+|-------------------------------------------|-------------|-------------------------------|-------------------------------|--------------------------------------------------------------------------------|----------------------------------|
+| [`case-05914326`](./case-05914326_token-rejected) | Coursera Support | Module 4: Functions (Swirl)     | R 4.5.2 + RStudio             | Manual token rejected despite 100% local completion                             | Workaround used (Sandbox IDE)   |
+| [`case-05926148`](./case-05926148_course-not-completing) | Coursera Support | Final Course Completion         | All graded modules complete   | Course stuck at 96%, Swirl marked “required” but no longer counts             | No resolution; workaround used  |
+| [`forum-advanced-r-psa-update`](./forum-advanced-r-psa-update) | Forum Post     | Course Completion Notice       | N/A                           | Public post warning users of 96% bug due to untracked Swirl                    | Marked as resolved by poster    |
+| [`forum-teaching-staff-followup`](./forum-teaching-staff-followup) | Forum Reply    | All                            | N/A                           | Coursera support directed issue back to community staff                        | No course mentors assigned      |
+| [`forum-r-programming-mentor-thread`](./forum-r-programming-mentor-thread) | Forum Thread   | Swirl Submission System        | N/A                           | Communication with forum mentor about swirl mechanics                          | Thread closed                   |
+
+---
+
+## 🧭 Timeline of Workaround
+- Swirl assignments completed in **R 4.5.2 + RStudio** for most modules
+- Final swirl assignment completed using the **Coursera-hosted RStudio Sandbox** due to token submission failure
+- Manual workaround allowed full course objectives to be completed
+- Course remains listed at 96% (no certificate issued as of last update)
+
+---
+
+## 🧾 Documentation Style
+Each folder contains:
+- A `README.txt` with summary of the issue, tools used, actions taken, and outcome
+- Screenshots of support responses or discussion forum interactions
+- Archived forum posts (in image format) where applicable
+
+---
+
+## 💬 Final Note
+This folder was created for:
+- Transparency in technical troubleshooting
+- Documentation of a learner’s journey navigating educational platform limitations
+- A reproducible record for others facing similar issues in the Advanced R Programming course
+

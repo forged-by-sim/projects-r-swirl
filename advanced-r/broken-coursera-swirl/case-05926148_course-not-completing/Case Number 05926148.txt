@@ -1,0 +1,60 @@
+Case Number: 05926148  
+Date Opened: January 14, 2026  
+Status: Closed / unresolved  
+Course status: 96% complete despite full graded component completion (93.33% average)
+
+---
+
+### 📌 Issue Summary
+Although all graded components for the **Advanced R Programming** course were successfully completed — including quizzes and a peer-reviewed assignment — the course remained stuck at 96% due to Swirl lessons not being marked as complete.
+
+Mentor confirmation from another Johns Hopkins-affiliated course stated that **Swirl completions no longer impact certificates**, yet the system continued to block certificate issuance.
+
+---
+
+### 🧪 Environment Details
+- Platform: Coursera
+- Course: Advanced R Programming (Johns Hopkins)
+- Completion: All assignments, quizzes, and peer-reviewed components passed
+- Remaining: Only Swirl exercises unmarked, despite not counting toward final grade
+
+---
+
+### 🛠️ Actions Taken
+1. Submitted support ticket requesting manual course completion or certificate eligibility based on graded components alone
+2. Attached screenshots showing:
+   - Course progress stuck at 96%
+   - Forum post link and timestamp
+   - Mentor confirmation from related course
+3. Coursera Support requested proof of Community Forum post
+4. Shared forum link and all requested images in follow-up email
+
+---
+
+### 📥 Coursera Response
+Despite the evidence and escalations:
+- Support confirmed no mentors are currently assigned to the course
+- Response loop redirected issue back to the Community Forum
+- Final response re-sent general instructions for posting, despite confirmation the post had already been made
+
+📎 See attached screenshots for full communication timeline.
+
+---
+
+### ⚠️ Remaining Issue
+This appears to be a **platform-side logic bug**:
+> Swirl assignments are no longer required, yet still block course completion.
+
+Escalation request to supervisor or backend engineer was made, but no resolution was reached by the support team.
+
+---
+
+### ✅ Manual Workaround (previously done for prior case)
+Used Coursera Sandbox IDE to re-do Swirl submissions for earlier modules.  
+No solution available for retroactively forcing course to register 100% without backend action.
+
+---
+
+### 💬 Notes
+This case reflects a **gap between policy updates and platform logic**, highlighting how legacy grading components (Swirl) can still impact course progression despite no longer being tied to certificates. Documented here for transparency and as a caution for future learners.
+

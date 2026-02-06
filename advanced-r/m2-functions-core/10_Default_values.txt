@@ -1,0 +1,26 @@
+The way that the num.download() function is currently specified, the user must enter the date and package name each time the function is called. However, it may be that there is a logical "default date" for which we always want to know the number of downloads, for any package. We can set a default value for the date argument, for example, to be July 20, 2016. In that case, if the date argument is not explicitly set by the user, the function can use the default value. The revised function might look as follows:
+
+
+num_download <- function(pkgname, date = "2016-07-20") {
+        year <- substr(date, 1, 4)
+        src <- sprintf("http://cran-logs.rstudio.com/%s/%s.csv.gz",
+                       year, date)
+        dest <- file.path("data", basename(src))
+        if(!file.exists(dest))
+                download.file(src, dest, quiet = TRUE)
+        cran <- read_csv(dest, col_types = "ccicccccci", progress = FALSE)
+        cran %>% filter(package == pkgname) %>% nrow
+}
+
+
+Now we can call the function in the following manner. Notice that we do not specify the date argument.
+
+num_download("Rcpp")
+[1] 14761
+
+
+Default values play a critical role in R functions because R functions are often called interactively. When using R in interactive mode, it can be a pain to have to specify the value of every argument in every instance of calling the function. Sometimes we want to call a function multiple times while varying a single argument (keeping the other arguments at a sensible default).
+
+Also, function arguments have a tendency to proliferate. As functions mature and are continuously developed, one way to add more functionality is to increase the number of arguments. But if these new arguments do not have sensible default values, then users will generally have a harder time using the function.
+
+As a function author, you have tremendous influence over the user's behavior by specifying defaults, so take care in choosing them. However, just note that a judicious use of default values can greatly improve the user experience with respect to your function.

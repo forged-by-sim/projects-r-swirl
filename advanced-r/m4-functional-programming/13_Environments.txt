@@ -1,0 +1,60 @@
+Environments are data structures in R that have special properties with regard to their role in how R code is executed and how memory in R is organized. You may not realize it but you’re probably already familiar with one environment called the global environment. Environments formalize relationships between variable names and values. When you enter x <- 55 into the R console what you’re saying is: assign the value of 55 to a variable called x, and store this assignment in the global environment. The global environment is therefore where most R users do most of their programming and analysis.
+
+You can create a new environment using new.env(). You can assign variables in that environment in a similar way to assigning a named element of a list, or you can use assign(). You can retrieve the value of a variable just like you would retrieve the named element of a list, or you can use get(). Notice that assign() and get() are opposites:
+
+12345678910
+my_new_env <- new.env()
+my_new_env$x <- 4
+my_new_env$x
+[1] 4
+
+assign("y", 9, envir = my_new_env)
+get("y", envir = my_new_env)
+[1] 9
+my_new_env$y
+[1] 9
+
+
+You can get all of the variable names that have been assigned in an environment using ls(), you can remove an association between a variable name and a value using rm(), and you can check if a variable name has been assigned in an environment using exists():
+
+
+ls(my_new_env)
+[1] "x" "y"
+rm(y, envir = my_new_env)
+exists("y", envir = my_new_env)
+[1] TRUE
+exists("x", envir = my_new_env)
+[1] TRUE
+my_new_env$x
+[1] 4
+my_new_env$y
+NULL
+
+
+Environments are organized in parent/child relationships such that every environment keeps track of its parent, but parents are unaware of which environments are their children. Usually the relationships between environments is not something you should try to directly control. You can see the parents of the global environment using thesearch() function:
+
+
+search()
+ [1] ".GlobalEnv"             "package:magrittr"      
+ [3] "package:tidyr"          "package:microbenchmark"
+ [5] "package:purrr"          "package:dplyr"         
+ [7] "package:readr"          "package:stats"         
+ [9] "package:graphics"       "package:grDevices"     
+[11] "package:utils"          "package:datasets"      
+[13] "Autoloads"              "package:base"        
+
+  
+As you can see package:magrittr is the parent of .GlobalEnv, and package:tidyr is parent of package:magrittr, and so on. In general the parent of .GlobalEnv is always the last package that was loaded usinglibrary(). Notice that after I load the ggplot2 package, that package becomes the parent of .GlobalEnv:
+
+
+library(ggplot2)
+search()
+ [1] ".GlobalEnv"             "package:ggplot2"       
+ [3] "package:magrittr"       "package:tidyr"         
+ [5] "package:microbenchmark" "package:purrr"         
+ [7] "package:dplyr"          "package:readr"         
+ [9] "package:stats"          "package:graphics"      
+[11] "package:grDevices"      "package:utils"         
+[13] "package:datasets"       "Autoloads"             
+[15] "package:base"          
+

@@ -1,0 +1,5 @@
+Summary
+
+Functions that use non-standard evaluation can cause problems within functions written for a package.
+
+The NSE functions in tidyverse packages all have standard evaluation analogues that should be used when writing functions that will be used by others.

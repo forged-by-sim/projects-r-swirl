@@ -1,0 +1,38 @@
+1. Debugging is the process of
+==> getting your expectations about code behavior to converge with reality
+
+
+2. Which of the following functions initiates an interactive debugging environment that allows you to step through code one expression at a time?
+==> browser()
+
+
+3. Which of the following functions allows you to temporarily insert pieces of code into other functions to modify their behavior?
+==> trace()
+
+
+4. What does the traceback() function do?
+==> returns the state of the function cal stack just before an occurred
+
+
+5. When should the traceback() function be called?
+==> immediately after an error occurs 
+
+
+6. What does calling trace("f") for function "f()" do?
+==> Whenever f() is called, a message is printed to the console indicating that the function was called.
+
+
+7. What is the microbenchmark package useful for?
+==> comparing the speed of several functions that do the same thing 
+
+
+8. What does the RProf() function do?
+==> writes out the function call stack at user-specified intervals of time
+
+
+9. What does the profvis() function do?
+==> displays profiling information in an interactive visualization in RStudio
+
+
+10. Which function is better for analyzing fast-running functions: profvis() or microbenchmark()?
+==> profvis() 

@@ -1,0 +1,22 @@
+next is used to skip an iteration of a loop.
+
+for(i in 1:100) {
+        if(i <= 20) {
+                ## Skip the first 20 iterations
+                next                 
+        }
+        ## Do something here
+}
+
+
+break is used to exit a loop immediately, regardless of what iteration the loop may be on.
+
+for(i in 1:100) {
+      print(i)
+
+      if(i > 20) {
+              ## Stop loop after 20 iterations
+              break  
+      }     
+}
+

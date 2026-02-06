@@ -1,0 +1,3 @@
+The debugging tools in any programming language can be essential for tracking down problems in code, especially when the code becomes complex and spans many lines. However, one should not lean on them too heavily so that they become a regular part of the programming process. It is easy to get into a situation where you “throw some code out there” and then let the debugger catch it before something bad happens. If you find yourself coding up a function and then immediately calling debug() on it, you are in this situation.
+
+A better approach is to think carefully about what a function should do and then consider how to code it up. A few minutes of careful forethought can often save the hapless programmer hours of debugging.
