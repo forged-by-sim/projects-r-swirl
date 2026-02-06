@@ -49,3 +49,8 @@ This advanced track taught me to **think modularly**, **debug strategically**, a
 From rewriting swirl’s broken logic to structuring output visualizations for performance testing, every step brought me closer to real-world simulation thinking.  
 This repo marks the leap from procedural coding to simulation-ready development in R.
 
+
+📌 Note on Swirl Submission Issues:
+Some swirl lessons encountered submission errors or token rejections despite successful local completion. All related documentation, screenshots, and Coursera support cases are archived in the `broken-r-swirl` folder to demonstrate transparency and technical troubleshooting efforts.
+
+
